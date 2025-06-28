@@ -1,11 +1,6 @@
 <?php
 require("header.php");
-if ($_GET && $_GET["command"] == "signIn") {
-    require("login.php");
-}
-if ($_GET && $_GET["command"] == "signUp") {
-    require("signUp.php");
-}
+require("loginScript.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
