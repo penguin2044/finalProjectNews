@@ -26,6 +26,5 @@ $login = false;
             </ul>
         </li>
     </ul>
-    </li>
-    </ul>
+
 </header>
