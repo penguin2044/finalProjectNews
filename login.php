@@ -1,18 +1,18 @@
 <div id="login">
     <div>
         <h2>Login</h2>
-        <small>Dont have a account? <a href="">Sign up</a></small>
-        <form action="#" method="post">
+        <small>Dont have a account? <a href="?command=signUp">Sign up</a></small>
+        <form action="" method="post">
             <ul>
                 <li>
-                    <input type="text" placeholder="Username">
+                    <input type="text" name="username" placeholder="Username">
                 </li>
                 <li>
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password">
                 </li>
                 <li>
                     <button type="submit">Reset</button>
-                    <button type="submit">Login</button>
+                    <button type="submit" name="signIn" value="signIn">Login</button>
 
                 </li>
             </ul>
