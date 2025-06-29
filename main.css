@@ -116,6 +116,9 @@ header {
 			color: var(--headlinkColor);
 			cursor: pointer;
 		}
+		.empty {
+			margin-top: 5px !important;
+		}
 	}
 }
 body {
