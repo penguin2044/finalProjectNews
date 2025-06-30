@@ -120,6 +120,9 @@ header {
 			margin-top: 5px !important;
 		}
 	}
+	p a {
+		color: white;
+	}
 }
 body {
 	height: 300vh;

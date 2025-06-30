@@ -27,6 +27,12 @@ $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
         $error = true;
        }
     }
+      if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $email)) {
+        $emailregex = true;
+        if ($error != true) {
+        $error = true;
+       }
+    }
     if ($password  != $_POST["repassword"] && !empty($password ) && !empty($_POST["repassword"])) {
         $passwordError = true;
         if ($error != true) {
@@ -48,13 +54,13 @@ $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
        
     }
     
-     if ( strlen($password) <= 8 && strlen($password) >= 50) {
-       
+     if ( strlen($password) <= 8 || strlen($password) >= 50) {
+       $passwordLong = true;
          if($error != true) {
         $error = true;
        }
     }
-    if ($error == false) {
+    
         $query = "SELECT
     *
 FROM
@@ -69,9 +75,9 @@ WHERE
    $error = true;
    $emailUsed = true;
    }
-    }
+    
 
-if ($error == false) {
+
         $query = "SELECT
     *
 FROM
@@ -87,7 +93,7 @@ WHERE
        $usernameTaken = true;
     
    }
-    }
+  
 
     if ($error == false) {
        $query = "INSERT INTO users(userName,password,email) values (:userName, :password, :email)";
@@ -97,7 +103,7 @@ WHERE
         $statement-> bindvalue(':email', $email);
         
         $statement ->execute();
-        echo "subbmitted";
+        
        }
 }
 
@@ -132,9 +138,14 @@ WHERE
                         <p>email is empty</p>
                     </li>
                 <?php endif ?>
+                 <?php if ($emailUsed): ?>
+                    <li class="empty">
+                        <p>email is used already</p>
+                    </li>
+                <?php endif ?>
                 <?php if ($emailregex): ?>
                     <li class="empty">
-                        <p>email is empty</p>
+                        <p> format is Wrong </p>
                     </li>
                 <?php endif ?>
                 <li>
@@ -145,6 +156,11 @@ WHERE
                         <p>password is empty</p>
                     </li>
                 <?php endif ?>
+                 <?php if ($passwordLong): ?>
+                    <li class="empty">
+                        <p>password must be less then 50 and longer then 8 long</p>
+                    </li>
+                <?php endif ?>
                 <li>
                     <input type="password" name="repassword" placeholder="ReType Password">
                 </li>
@@ -153,14 +169,17 @@ WHERE
                         <p>retype password is empty</p>
                     </li>
                 <?php endif ?>
-                <?php if ($passwordLong): ?>
-                    <li class="empty">
-                        <p>password is bigger then 50 or less then 8</p>
-                    </li>
-                <?php endif ?>
+               
                 <?php if ($passwordError): ?>
                     <li class="empty">
                         <p>password dont match</p>
+                    </li>
+                <?php endif ?>
+                 <?php if ($_POST && $error == false): ?>
+                    <li class="empty">
+                        <p>Account created!</p>
+                        <br>
+                        <p><a href="?command=signIn">SignIn</a></p>
                     </li>
                 <?php endif ?>
                 <li>
