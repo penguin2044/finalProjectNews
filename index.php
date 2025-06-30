@@ -1,13 +1,4 @@
-<?php
-if (session_status() < 2) {
- session_start();
-}
 
-
-require("header.php");
-require("loginScript.php");
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,12 +10,20 @@ require("loginScript.php");
     <?php if ($_GET && $_GET["command"] == "signIn" || $_GET && $_GET["command"] == "signUp"): ?>
         <link rel="stylesheet" href="overFlow.css">
     <?php endif ?>
-
-
 </head>
+<?php
+if (session_status() < 2) {
+ session_start();
+}
 
+require("header.php"); require("loginScript.php");
+
+
+
+?>
 <body>
-
+  
+<h1>Home</h1>
 </body>
 
 </html>

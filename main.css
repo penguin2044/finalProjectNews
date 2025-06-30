@@ -2,6 +2,8 @@
 	--headBackgroundColor: black;
 	--headlinkColor: white;
 	--headBorderColor: white;
+	--mainBackgroundColor: rgb(19, 15, 15);
+	--SecBackgroundColor: rgb(29, 23, 23);
 }
 * {
 	margin: 0px;
@@ -17,10 +19,20 @@ header {
 	ul {
 		display: flex;
 		list-style: none;
+		flex-wrap: wrap;
 	}
 	#firstUl {
 		justify-content: space-between;
 		align-items: center;
+		@media (max-width: 500px) {
+			justify-content: center !important;
+			li {
+				margin-top: 20px;
+			}
+			ul {
+				justify-content: center !important;
+			}
+		}
 	}
 	ul ul {
 		gap: 15px;
@@ -126,5 +138,99 @@ header {
 }
 body {
 	height: 300vh;
-	background-color: rgb(255, 255, 255);
+	color: var(--headlinkColor);
+	background-color: var(--mainBackgroundColor);
+	.sh1 {
+		display: flex;
+		justify-content: center;
+		margin-bottom: -30px;
+		margin-top: 100px;
+	}
+	h1 {
+		margin: 40px 30px;
+	}
+	.h2 {
+		text-align: center;
+		margin-top: 40px;
+		margin-bottom: -30px;
+	}
+	.search,
+	#categories {
+		button,
+		input,
+		select {
+			background-color: var(--headBackgroundColor);
+			padding: 5px 10px;
+			font-size: larger;
+			font-weight: 600;
+			border-radius: 10px;
+			border: 2px var(--headlinkColor) solid;
+			color: var(--headlinkColor);
+		}
+		select:hover {
+			border-color: var(--headlinkColor) transparent var(--headlinkColor)
+				var(--headlinkColor);
+		}
+
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+		margin-top: 60px;
+
+		button {
+			cursor: pointer;
+		}
+		button:hover {
+			box-shadow: 0px 0px 10px var(--headBorderColor);
+		}
+		button:focus {
+			box-shadow: 0px 0px 20px var(--headBorderColor);
+		}
+		input:focus {
+			box-shadow: 0px 0px 15px var(--headBorderColor);
+		}
+	}
+	#categories {
+		flex-wrap: wrap;
+		margin-left: 20vw;
+		margin-right: 20vw;
+	}
+	.categorieSelected {
+		border: 2px #75bb0b solid !important;
+		color: #75bb0b !important;
+	}
+	.categorieSelected:hover {
+		box-shadow: 0px 0px 10px #bb170b !important;
+		border: 2px #bb170b solid !important;
+		color: #bb170b !important;
+	}
+	.categorieSelected:focus {
+		box-shadow: 0px 0px 20px #df180a !important;
+	}
+}
+.searchRe {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 50px;
+	margin-top: 50px;
+	.searchA {
+		display: flex;
+		gap: 20px;
+		color: var(--headlinkColor);
+		text-decoration: none;
+		width: 600px;
+		height: 150px;
+		div {
+			padding: 15px 15px 15px 0px;
+		}
+		background-color: var(--SecBackgroundColor);
+		h2 {
+		}
+		img {
+			width: 150px;
+			height: 150px;
+			object-fit: cover;
+		}
+	}
 }

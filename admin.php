@@ -1,12 +1,4 @@
-<?php
- session_start();
- require("loginScript.php");
-require("header.php");
-if (!isset($_SESSION["isAdmin"]) || $_SESSION["isAdmin"] == 0) {
-    header("Location: index.php");
-}
 
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,9 +8,17 @@ if (!isset($_SESSION["isAdmin"]) || $_SESSION["isAdmin"] == 0) {
     <title>Admin Panel</title>
     <link rel="stylesheet" href="main.css">
 </head>
+<?php
+ session_start();
+ require("loginScript.php");
+require("header.php");
+if (!isset($_SESSION["isAdmin"]) || $_SESSION["isAdmin"] == 0) {
+    header("Location: index.php");
+}
 
+?>
 <body>
 
 </body>
-
+<h1>Admin panel</h1>
 </html>

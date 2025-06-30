@@ -120,7 +120,7 @@ $error = false;
                         <p>Logged In</p>
                     </li>
                     <li>
-                         <p><a href="index.php"> Go Home?</a></p>
+                         <p><a href="?"> Go Back?</a></p>
                     </li>
                 <?php endif ?>
                 <li>

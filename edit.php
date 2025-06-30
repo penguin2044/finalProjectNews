@@ -1,8 +1,4 @@
-<?php
-session_start();
-require("header.php");
-require("loginScript.php");
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +8,11 @@ require("loginScript.php");
     <title>Edit News Post</title>
     <link rel="stylesheet" href="main.css">
 </head>
-
+<?php
+session_start();
+require("header.php");
+require("loginScript.php");
+?>
 <body>
 
 </body>

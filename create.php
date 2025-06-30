@@ -1,8 +1,4 @@
-<?php
-session_start();
-require("header.php");
-require("loginScript.php");
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,9 +8,16 @@ require("loginScript.php");
     <title>Create News Post</title>
     <link rel="stylesheet" href="main.css">
 </head>
-
+<?php
+session_start();
+if (!isset($_SESSION["logged"]) || $_SESSION["logged"] == 0) {
+    header("Location: index.php");
+}
+require("header.php");
+require("loginScript.php");
+?>
 <body>
-
+<h1>Create Post</h1>
 </body>
 
 </html>

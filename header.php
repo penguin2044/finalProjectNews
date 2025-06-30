@@ -28,8 +28,8 @@ if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == 1) {
             <ul>
 
                 <li>
-                    <form action="/" method="post">
-                        <input type="text" name="search">
+                    <form action="search.php" method="post">
+                       
                         <button type="submit">Search</button>
                     </form>
                 </li>
@@ -42,7 +42,7 @@ if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == 1) {
                         <li><a href="admin.php">Admin Panel</a></li>
                        
                     <?php endif ?>
-                        <li><a href="post.php">Post</a></li>
+                        <li><a href="create.php">Create post</a></li>
                     <li><a href="#"><?= $_SESSION["username"] ?></a></li>
                         <li><a href="?command=Logout">Logout</a></li>
                         

@@ -9,10 +9,11 @@ require("loginScript.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit News Post</title>
+     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
 
 </body>
-
+<h1>Post Title</h1>
 </html>
