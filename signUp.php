@@ -6,23 +6,99 @@ $emailregex = false;
 $passwordError = false;
 $passwordempty = false;
 $rePasswordempty = false;
+$passwordLong = false;
+$error = false;
+$usernameTaken = false;
+$emailUsed = false;
 
 if ($_POST) {
-    if (empty($_POST["username"])) {
+$username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
+$password = $_POST["password"] ;
+$email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    if (empty($username)) {
         $usernameEmpty = true;
+       if ($error != true) {
+        $error = true;
+       }
     }
-    if (empty($_POST["email"])) {
+    if (empty($email)) {
         $emailError = true;
+        if ($error != true) {
+        $error = true;
+       }
     }
-    if ($_POST["password"] != $_POST["repassword"] && !empty($_POST["password"]) && !empty($_POST["repassword"])) {
+    if ($password  != $_POST["repassword"] && !empty($password ) && !empty($_POST["repassword"])) {
         $passwordError = true;
+        if ($error != true) {
+        $error = true;
+       }
     }
-    if (empty($_POST["password"])) {
+    if (empty($password )) {
         $passwordempty = true;
+        if ($error != true) {
+        $error = true;
+       }
     }
     if (empty($_POST["repassword"])) {
         $rePasswordempty = true;
+        if ($error != true) {
+        $error = true;
+       }
+       
+       
     }
+    
+     if ( strlen($password) <= 8 && strlen($password) >= 50) {
+       
+         if($error != true) {
+        $error = true;
+       }
+    }
+    if ($error == false) {
+        $query = "SELECT
+    *
+FROM
+    users
+WHERE
+   email = :email ";
+   $statement = $db->prepare($query);
+
+   $statement-> bindvalue(':email', $email);
+   $statement->execute();
+   if ($statement->rowCount() > 0 ) {
+   $error = true;
+   $emailUsed = true;
+   }
+    }
+
+if ($error == false) {
+        $query = "SELECT
+    *
+FROM
+    users
+WHERE
+ userName = :userName";
+   $statement = $db->prepare($query);
+   $statement-> bindvalue(':userName', $username);
+   
+   $statement->execute();
+   if ($statement->rowCount() > 0 ) {
+       $error = true;
+       $usernameTaken = true;
+    
+   }
+    }
+
+    if ($error == false) {
+       $query = "INSERT INTO users(userName,password,email) values (:userName, :password, :email)";
+       $statement = $db->prepare($query);
+        $statement-> bindvalue(':userName', $username);
+        $statement-> bindvalue(':password', $password);
+        $statement-> bindvalue(':email', $email);
+        
+        $statement ->execute();
+        echo "subbmitted";
+       }
 }
 
 ?>
@@ -75,6 +151,11 @@ if ($_POST) {
                 <?php if ($rePasswordempty): ?>
                     <li class="empty">
                         <p>retype password is empty</p>
+                    </li>
+                <?php endif ?>
+                <?php if ($passwordLong): ?>
+                    <li class="empty">
+                        <p>password is bigger then 50 or less then 8</p>
                     </li>
                 <?php endif ?>
                 <?php if ($passwordError): ?>
