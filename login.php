@@ -1,4 +1,9 @@
 <?php 
+
+
+
+
+
  $passwordempty = false;
   $usernameEmpty = false;
 $usernameNotFound = false;
@@ -57,6 +62,19 @@ $error = false;
    }
     if ($error != true) {
         $loggedIn = true;
+        
+
+        $_SESSION["logged"] = true;
+
+       $user = $statement -> fetch();
+        $admin = $user["isAdmin"];
+        
+        if ($admin == 1) {
+            $_SESSION["isAdmin"] = true;
+        }
+        $_SESSION["logged"] = true;
+        $_SESSION["username"] = $username;
+       
        }
   
 }
@@ -100,6 +118,9 @@ $error = false;
                  <?php if ($loggedIn): ?>
                     <li class="empty">
                         <p>Logged In</p>
+                    </li>
+                    <li>
+                         <p><a href="index.php"> Go Home?</a></p>
                     </li>
                 <?php endif ?>
                 <li>

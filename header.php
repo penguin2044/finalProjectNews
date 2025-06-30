@@ -1,13 +1,13 @@
 <?php
 require('connect.php');
 
-if (isset($_SESSION["login"])) {
+if (isset($_SESSION["logged"]) && $_SESSION["logged"] == 1) {
     $login = true;
 } else {
     $login = false;
 }
 
-if (isset($_SESSION["admin"])) {
+if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == 1) {
     $admin = true;
 } else {
     $admin = false;
@@ -40,8 +40,8 @@ if (isset($_SESSION["admin"])) {
                     <?php if ($admin): ?>
                         <li><a href="#">Admin Panel</a></li>
                     <?php endif ?>
-                    <li><a href="#">12345678901234567890</a></li>
-
+                    <li><a href="#"><?= $_SESSION["username"] ?></a></li>
+                        <li><a href="?command=Logout">Logout</a></li>
                 <?php endif ?>
             </ul>
         </li>
