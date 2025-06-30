@@ -72,9 +72,9 @@ $error = false;
         if ($admin == 1) {
             $_SESSION["isAdmin"] = true;
         }
+        else{$_SESSION["isAdmin"] = false;}
         $_SESSION["logged"] = true;
         $_SESSION["username"] = $username;
-       
        }
   
 }
