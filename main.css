@@ -155,10 +155,11 @@ body {
 		margin-bottom: -30px;
 	}
 	.search,
-	#categories {
+	#categories form {
 		button,
 		input,
-		select {
+		select,
+		a {
 			background-color: var(--headBackgroundColor);
 			padding: 5px 10px;
 			font-size: larger;
@@ -166,6 +167,7 @@ body {
 			border-radius: 10px;
 			border: 2px var(--headlinkColor) solid;
 			color: var(--headlinkColor);
+			text-decoration: none;
 		}
 		select:hover {
 			border-color: var(--headlinkColor) transparent var(--headlinkColor)
@@ -176,18 +178,31 @@ body {
 		gap: 10px;
 		justify-content: center;
 		margin-top: 60px;
+		flex-wrap: wrap;
 
 		button {
 			cursor: pointer;
 		}
-		button:hover {
+		button:hover,
+		a:hover {
 			box-shadow: 0px 0px 10px var(--headBorderColor);
 		}
-		button:focus {
+		button:focus,
+		a:focus {
 			box-shadow: 0px 0px 20px var(--headBorderColor);
 		}
 		input:focus {
 			box-shadow: 0px 0px 15px var(--headBorderColor);
+		}
+		.b {
+			border-color: #0bbb22;
+			color: #0bbb22;
+		}
+
+		.b:hover {
+			box-shadow: 0px 0px 10px #0bbb22 !important;
+			border: 2px #0bbb22 solid !important;
+			color: #0bbb22 !important;
 		}
 	}
 	#categories {
@@ -196,8 +211,8 @@ body {
 		margin-right: 20vw;
 	}
 	.categorieSelected {
-		border: 2px #75bb0b solid !important;
-		color: #75bb0b !important;
+		border: 2px #bb170b solid !important;
+		color: #bb170b !important;
 	}
 	.categorieSelected:hover {
 		box-shadow: 0px 0px 10px #bb170b !important;
@@ -232,5 +247,9 @@ body {
 			height: 150px;
 			object-fit: cover;
 		}
+	}
+	#ERROR {
+		color: #bb170b !important;
+		font-weight: 900;
 	}
 }
