@@ -267,3 +267,65 @@ body {
 		margin-right: 20%;
 	}
 }
+.ql-stroke,
+.ql-snow .ql-picker {
+	color: white !important;
+	stroke: rgb(255, 246, 246) !important;
+}
+.ql-picker-options {
+	background-color: black !important;
+}
+.createForm {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	width: 70vw;
+	justify-content: center;
+
+	li {
+		width: 60vw;
+	}
+	.inputs {
+		input {
+			margin-left: 28px;
+		}
+	}
+	ul {
+		list-style: none;
+	}
+	input,
+	select {
+		background-color: var(--headBackgroundColor);
+		padding: 2px 2px;
+		margin-bottom: 20px;
+		font-size: larger;
+		font-weight: 600;
+		border-radius: 2px;
+		border: 2px var(--headlinkColor) solid;
+		color: var(--headlinkColor);
+		text-decoration: none;
+		margin-left: 20px;
+	}
+	.buttons123 {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 30px;
+		button {
+			background-color: var(--headBackgroundColor);
+
+			margin-bottom: 20px;
+			font-size: larger;
+			font-weight: 600;
+			border-radius: 2px;
+			border: 2px var(--headlinkColor) solid;
+			color: var(--headlinkColor);
+			padding: 10px 10vw;
+		}
+		button:hover {
+			box-shadow: 0px 0px 10px var(--headBorderColor);
+		}
+		button:focus {
+			box-shadow: 0px 0px 20px var(--headBorderColor);
+		}
+	}
+}
