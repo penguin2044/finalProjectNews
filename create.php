@@ -126,7 +126,7 @@ $statement->execute();//executing the statmate
 
     <form action="" method="post" id="createForm" enctype='multipart/form-data'>
         <ul>
-            <li class="inputs"><label for='image'>Post name:</label><input type="text" name="postName" id="postName"></li>
+            <li class="inputs"><label for='postName'>Post name:</label><input type="text" name="postName" id="postName"></li>
             <?php if($postNameError):?>
     <li class="errorli"><p class="errorP">ERROR: Post name is empty or invalid</p></li>
     <?php endif?>
@@ -137,7 +137,7 @@ $statement->execute();//executing the statmate
     <?php if($postImageError):?>
     <li class="errorli"><p class="errorP">ERROR: no Image found or invalid format we only take png jpeg jpg and gif images.</p></li>
     <?php endif?>
-                <li> <label for='image'>Post name:</label><select name="categorie" id="categorie">
+                <li> <label for='categorie'>Post category:</label><select name="categorie" id="categorie">
                 
         <?php foreach ($categories as $row): ?>
     <option value="<?= $row["categoryID"]?>"><?= $row["categoryName"]?></option>
