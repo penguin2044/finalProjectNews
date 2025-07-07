@@ -128,7 +128,8 @@ $statement->bindValue(':message', $postMessage);
 if ($image_upload_detected) {
 $statement->bindValue(':image', $image_filename);
 }else{
-    $statement->bindValue(':image', "default.png");
+    $statement->bindValue(':image', $post["postImage"]);
+
 }
 
 $statement->bindValue(':category', $categorie);
