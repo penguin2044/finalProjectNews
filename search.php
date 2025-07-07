@@ -106,11 +106,11 @@ $nosearch = true;
   <?php if(!$nosearch): ?>
   <?php foreach ($posts as $row): ?>
     <a href="post.php?postID=<?= $row["postID"]?>" class="searchA" >
-        <img src="Postimages/default.png" alt="Could Not find image">
+        <img src="Postimages/<?= $row["postImage"]?>" alt="Could Not find image">
         <div>
             <h2><?=$row["postName"] ?></h2>
             <small><?= $row["userName"]?></small>
-            <p><?= $row["postMessage"]?></p>
+            
         </div>
   </a>
     <?php endforeach ?>

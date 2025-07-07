@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit News Post</title>
      <link rel="stylesheet" href="main.css">
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+     
+
 </head>
 <?php
 session_start();
@@ -24,12 +27,17 @@ $id = $_GET["postID"];
 </body>
 
  <?php foreach ($post as $row): ?>
- 
+
 <div id="Post">
- <img src="PostImages/default.png" alt="could not find image">
- <h1><?= $row["postName"]?> <small> by <?= $row["userName"]?></small></h1>
- <div><?= $row["postMessage"]?></div>
+  
+ 
+ <img src="PostImages/<?= $row["postImage"] ?>" alt="could not find image">
+ <h1 ><?= $row["postName"]?> <small> by <?= $row["userName"]?></small></h1>
+ <div class="ql-editor"> <?= $row["postMessage"]?></div>
+ 
  </div>
+ 
+
     <?php endforeach ?>
 
 </html>
