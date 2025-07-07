@@ -98,10 +98,7 @@ use Dom\Text;
     
     $image_upload_detected = isset($_FILES['image']) && ($_FILES['image']['error'] === 0);
     $upload_error_detected = isset($_FILES['image']) && ($_FILES['image']['error'] > 0);
-if (!$image_upload_detected ) {
-    $postImageError = true;
-    $error = true;
-}
+
     if ($image_upload_detected) { 
         $image_filename        = $_FILES['image']['name'];
         $temporary_image_path  = $_FILES['image']['tmp_name'];
@@ -120,6 +117,7 @@ if (!$image_upload_detected ) {
 
 
     if(!$error){
+        $id = $post["postID"];
         $query = "UPDATE posts SET postName = :title, postMessage = :message, postImage = :image, categoryID = :category WHERE postID = $id";
 $statement = $db->prepare($query);
         //  Bind values to the parameters
@@ -127,11 +125,18 @@ $statement = $db->prepare($query);
         
 $statement->bindValue(':title', $postName);
 $statement->bindValue(':message', $postMessage);
+if ($image_upload_detected) {
 $statement->bindValue(':image', $image_filename);
+}else{
+    $statement->bindValue(':image', "default.png");
+}
+
 $statement->bindValue(':category', $categorie);
 
 
 $statement->execute();//executing the statmate
+
+header(header: "Location: post.php?postID={$id}");//once the above code is done it reloads the page with the get id of id
     }
     }
 
