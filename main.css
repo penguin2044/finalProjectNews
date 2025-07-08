@@ -229,6 +229,7 @@ body {
 	flex-wrap: wrap;
 	gap: 50px;
 	margin-top: 50px;
+
 	.searchA {
 		display: flex;
 		gap: 20px;
@@ -331,6 +332,87 @@ body {
 			border: 2px var(--headlinkColor) solid;
 			color: var(--headlinkColor);
 			padding: 10px 10vw;
+		}
+		button:hover {
+			box-shadow: 0px 0px 10px var(--headBorderColor);
+		}
+		button:focus {
+			box-shadow: 0px 0px 20px var(--headBorderColor);
+		}
+	}
+}
+#home {
+	display: flex;
+	justify-content: center;
+	gap: 100px;
+	flex-wrap: wrap;
+	.indexPost {
+		.block {
+			margin-left: 30%;
+			margin-right: 30%;
+		}
+		background-color: var(--SecBackgroundColor);
+		border: 2px var(--SecBackgroundColor) solid;
+		border-radius: 10px;
+		padding-top: 50px;
+		padding-bottom: 50px;
+		width: 50vw;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 50px;
+
+		.searchA {
+			display: flex;
+			gap: 20px;
+			color: var(--headlinkColor);
+			text-decoration: none;
+			width: 400px;
+			height: 150px;
+			div {
+				padding: 15px 15px 15px 0px;
+			}
+			background-color: var(--mainBackgroundColor);
+			border-radius: 10px;
+			h2 {
+			}
+			img {
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+			}
+		}
+	}
+	#categorie2 {
+		width: 20vw;
+		background-color: var(--SecBackgroundColor);
+		border: 2px var(--SecBackgroundColor) solid;
+		border-radius: 10px;
+		height: 100%;
+		padding: 30px;
+		position: sticky;
+		top: 195px;
+		.block {
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		form {
+			display: flex;
+			flex-wrap: wrap;
+
+			justify-content: center;
+			gap: 10px;
+		}
+		button {
+			background-color: var(--headBackgroundColor);
+			padding: 5px 10px;
+			font-size: larger;
+			font-weight: 600;
+
+			border-radius: 10px;
+			border: 2px var(--headlinkColor) solid;
+			color: var(--headlinkColor);
+			text-decoration: none;
 		}
 		button:hover {
 			box-shadow: 0px 0px 10px var(--headBorderColor);
