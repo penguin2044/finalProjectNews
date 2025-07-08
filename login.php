@@ -13,6 +13,7 @@ if ($_POST) {
 $username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
 $password = $_POST["password"];
 $error = false;
+
  if (empty($username)) {
         $usernameEmpty = true;
        if ($error != true) {
@@ -39,21 +40,22 @@ $error = false;
    
    $statement->execute();
     }
- if ($statement->rowCount() == 0 ) {
+ if ($error == false && $statement->rowCount() == 0 ) {
        if ($error != true) {
         $error = true;
        }
        $usernameNotFound = true;
     
    }
-     if ($error = false) {
+     if ($error == false) {
          $query = "SELECT * FROM users WHERE userName = :userName  and password = :password";
    $statement = $db->prepare($query);
    $statement-> bindvalue(':password', $password);
+   $statement-> bindvalue(':userName', $username);
    
    $statement->execute();
     }
- if ($statement->rowCount() == 0 ) {
+ if ($error == false && $statement->rowCount() == 0 ) {
         if ($error != true) {
         $error = true;
        }
