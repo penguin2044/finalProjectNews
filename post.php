@@ -13,31 +13,31 @@
 </head>
 <?php
 session_start();
-require("header.php");
-require("loginScript.php");
+require ('header.php');
+require ('loginScript.php');
 
-$id = $_GET["postID"];
- $query2 = "SELECT * FROM posts where postID = $id limit 1";
-  $statement2 = $db->prepare($query2);
-  $statement2->execute();
-  $post = $statement2->fetchAll();
+$id = $_GET['postID'];
+$query2 = "SELECT * FROM posts where postID = $id limit 1";
+$statement2 = $db->prepare($query2);
+$statement2->execute();
+$row = $statement2->fetch();
 ?>
 <body>
 
 </body>
 
- <?php foreach ($post as $row): ?>
+
 
 <div id="Post">
   
  
- <img src="PostImages/<?= $row["postImage"] ?>" alt="could not find image">
- <h1 ><?= $row["postName"]?> <small> by <?= $row["userName"]?></small></h1>
- <div class="ql-editor"> <?= $row["postMessage"]?></div>
+ <img src="PostImages/<?= $row['postImage'] ?>" alt="could not find image">
+ <h1 ><?= $row['postName'] ?> <small> by <?= $row['userName'] ?></small> <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == 1): ?><a href="edit.php?postID=<?= $row['postID'] ?>">Edit</a> <?php endif ?></h1>
+ <div class="ql-editor"> <?= $row['postMessage'] ?></div>
  
  </div>
  
 
-    <?php endforeach ?>
+
 
 </html>

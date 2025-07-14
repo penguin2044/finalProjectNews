@@ -255,6 +255,17 @@ body {
 	}
 }
 #Post {
+	h1 a {
+		font-size: medium;
+		color: #bb170b;
+		text-decoration: none;
+	}
+	h1 a:hover {
+		color: #e01b0d;
+	}
+	h1 a:focus {
+		color: #ff1100;
+	}
 	display: flex;
 	flex-direction: column;
 
