@@ -12,99 +12,92 @@ $usernameTaken = false;
 $emailUsed = false;
 
 if ($_POST) {
-$username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
-$password = $_POST["password"] ;
-$email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = $_POST['password'];
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     if (empty($username)) {
         $usernameEmpty = true;
-       if ($error != true) {
-        $error = true;
-       }
+        if ($error != true) {
+            $error = true;
+        }
     }
     if (empty($email)) {
         $emailError = true;
         if ($error != true) {
-        $error = true;
-       }
+            $error = true;
+        }
     }
-      if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $email)) {
+    if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $email)) {
         $emailregex = true;
         if ($error != true) {
-        $error = true;
-       }
+            $error = true;
+        }
     }
-    if ($password  != $_POST["repassword"] && !empty($password ) && !empty($_POST["repassword"])) {
+    if ($password != $_POST['repassword'] && !empty($password) && !empty($_POST['repassword'])) {
         $passwordError = true;
         if ($error != true) {
-        $error = true;
-       }
+            $error = true;
+        }
     }
-    if (empty($password )) {
+    if (empty($password)) {
         $passwordempty = true;
         if ($error != true) {
-        $error = true;
-       }
+            $error = true;
+        }
     }
-    if (empty($_POST["repassword"])) {
+    if (empty($_POST['repassword'])) {
         $rePasswordempty = true;
         if ($error != true) {
-        $error = true;
-       }
-       
-       
+            $error = true;
+        }
     }
-    
-     if ( strlen($password) <= 8 || strlen($password) >= 50) {
-       $passwordLong = true;
-         if($error != true) {
-        $error = true;
-       }
+
+    if (strlen($password) <= 8 || strlen($password) >= 50) {
+        $passwordLong = true;
+        if ($error != true) {
+            $error = true;
+        }
     }
-    
-        $query = "SELECT
+
+    $query = 'SELECT
     *
 FROM
     users
 WHERE
-   email = :email ";
-   $statement = $db->prepare($query);
+   email = :email ';
+    $statement = $db->prepare($query);
 
-   $statement-> bindvalue(':email', $email);
-   $statement->execute();
-   if ($statement->rowCount() > 0 ) {
-   $error = true;
-   $emailUsed = true;
-   }
-    
+    $statement->bindvalue(':email', $email);
+    $statement->execute();
+    if ($statement->rowCount() > 0) {
+        $error = true;
+        $emailUsed = true;
+    }
 
-
-        $query = "SELECT
+    $query = 'SELECT
     *
 FROM
     users
 WHERE
- userName = :userName";
-   $statement = $db->prepare($query);
-   $statement-> bindvalue(':userName', $username);
-   
-   $statement->execute();
-   if ($statement->rowCount() > 0 ) {
-       $error = true;
-       $usernameTaken = true;
-    
-   }
-  
+ userName = :userName';
+    $statement = $db->prepare($query);
+    $statement->bindvalue(':userName', $username);
+
+    $statement->execute();
+    if ($statement->rowCount() > 0) {
+        $error = true;
+        $usernameTaken = true;
+    }
 
     if ($error == false) {
-       $query = "INSERT INTO users(userName,password,email) values (:userName, :password, :email)";
-       $statement = $db->prepare($query);
-        $statement-> bindvalue(':userName', $username);
-        $statement-> bindvalue(':password', $password);
-        $statement-> bindvalue(':email', $email);
-        
-        $statement ->execute();
-        
-       }
+        $query = 'INSERT INTO users(userName,password,email) values (:userName, :password, :email)';
+        $statement = $db->prepare($query);
+        $statement->bindvalue(':userName', $username);
+        $statement->bindvalue(':password', $password);
+        $statement->bindvalue(':email', $email);
+
+        $statement->execute();
+    }
 }
 
 ?>

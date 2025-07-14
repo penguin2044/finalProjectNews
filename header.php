@@ -1,19 +1,17 @@
 <?php
-require('connect.php');
+require ('connect.php');
 
-if (isset($_SESSION["logged"]) && $_SESSION["logged"] == 1) {
+if (isset($_SESSION['logged']) && $_SESSION['logged'] == 1) {
     $login = true;
 } else {
     $login = false;
 }
 
-if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == 1) {
+if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1) {
     $admin = true;
 } else {
     $admin = false;
 }
-
-
 
 ?>
 
@@ -43,7 +41,7 @@ if (isset($_SESSION["isAdmin"]) && $_SESSION["isAdmin"] == 1) {
                        
                     <?php endif ?>
                         <li><a href="create.php">Create post</a></li>
-                    <li><a href="#"><?= $_SESSION["username"] ?></a></li>
+                    <li><a href="#"><?= $_SESSION['username'] ?></a></li>
                         <li><a href="?command=Logout">Logout</a></li>
                         
                 <?php endif ?>

@@ -21,6 +21,38 @@ $query2 = "SELECT * FROM posts where postID = $id limit 1";
 $statement2 = $db->prepare($query2);
 $statement2->execute();
 $row = $statement2->fetch();
+
+$query = "SELECT * FROM comments where postID = $id ORDER by commentID desc";
+$statement = $db->prepare($query);
+$statement->execute();
+$comment = $statement->fetchAll();
+if (!$comment) {
+}
+$error = false;
+$commentErrorOne = false;
+$commentErrorTwo = false;
+if ($_POST) {
+    $commentPOST = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_SPECIAL_CHARS);
+    if (empty($commentPOST)) {
+        $error = true;
+        $commentErrorOne = true;
+    }
+    if (strlen($commentPOST) > 250) {
+        $error = true;
+        $commentErrorTwo = true;
+    }
+    if (!$error) {
+        $query = 'INSERT INTO comments (commentText, postID, userName ) VALUES (:commentText, :postID, :userName)';
+        $statement = $db->prepare($query);
+        //  Bind values to the parameters
+
+        $statement->bindValue(':commentText', $commentPOST);
+        $statement->bindValue(':postID', $row['postID']);
+        $statement->bindValue(':userName', $_SESSION['username']);
+
+        $statement->execute();  // executing the statmate
+    }
+}
 ?>
 <body>
 
@@ -28,7 +60,7 @@ $row = $statement2->fetch();
 
 
 
-<div id="Post">
+<div class="Post">
   
  
  <img src="PostImages/<?= $row['postImage'] ?>" alt="could not find image">
@@ -37,7 +69,37 @@ $row = $statement2->fetch();
  
  </div>
  
-
+<div class="post">
+    <div>
+    <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == 1): ?>
+    <form action="" method="post">
+        <label for="comment">comment</label> <br>
+        <textarea name="comment" id="comment"></textarea>
+        <?php if ($commentErrorOne): ?>
+        <p>the comment area cant be empty or not valid</p>
+        <?php endif ?>
+          <?php if ($commentErrorTwo): ?>
+          <p>your comment is to long</p>
+        <?php endif ?>
+ 
+        <button type="submit">Submit Comment</button>
+    </form>
+    <?php else: ?>
+        <h2 class="centerH2">You must log in to post a comment</h2>
+    <?php endif ?>
+    <?php if ($comment): ?>
+    <?php foreach ($comment as $indi): ?>
+    <div class="comment">
+        <h2><?= $indi['userName'] ?></h2>
+        <h3><?= (new DateTime($indi['created_at']))->format('F j, Y \a\t g:i A') ?></h3>
+       <p><?= $indi['commentText'] ?></p> 
+    </div>
+      <?php endforeach ?>
+      <?php else: ?>
+        <p class="noCom">no comments found</p>
+        <?php endif ?>
+    </div>
+</div>
 
 
 </html>
