@@ -1,0 +1,637 @@
+:root {
+	--headBackgroundColor: black;
+	--headlinkColor: white;
+	--headBorderColor: white;
+	--mainBackgroundColor: rgb(19, 15, 15);
+	--SecBackgroundColor: rgb(29, 23, 23);
+}
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+header {
+	background-color: var(--headBackgroundColor);
+	padding: 20px;
+	position: sticky;
+	top: 0px;
+	ul {
+		display: flex;
+		list-style: none;
+		flex-wrap: wrap;
+	}
+	#firstUl {
+		justify-content: space-between;
+		align-items: center;
+		@media (max-width: 500px) {
+			justify-content: center !important;
+			li {
+				margin-top: 20px;
+			}
+			ul {
+				justify-content: center !important;
+			}
+		}
+	}
+	ul ul {
+		gap: 15px;
+		align-items: center;
+	}
+	a {
+		text-decoration: none;
+		color: var(--headlinkColor);
+		font-size: larger;
+		font-weight: 600 !important;
+		padding: 5px 10px;
+		border: 2px solid var(--headBorderColor);
+		border-radius: 10px;
+	}
+	a:hover {
+		box-shadow: 0px 0px 10px var(--headBorderColor);
+	}
+	a:focus {
+		box-shadow: 0px 0px 20px var(--headBorderColor);
+	}
+
+	button,
+	input {
+		background-color: var(--headBackgroundColor);
+		padding: 5px 10px;
+		font-size: larger;
+		font-weight: 600 !important;
+		border-radius: 10px;
+		border: 2px var(--headlinkColor) solid;
+		color: var(--headlinkColor);
+	}
+	button {
+		cursor: pointer;
+	}
+	button:hover {
+		box-shadow: 0px 0px 10px var(--headBorderColor);
+	}
+	button:focus {
+		box-shadow: 0px 0px 20px var(--headBorderColor);
+	}
+	input:focus {
+		box-shadow: 0px 0px 15px var(--headBorderColor);
+	}
+}
+#login {
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(90, 90, 90, 0.267);
+	display: flex;
+	justify-content: center;
+	padding-top: 10%;
+
+	div {
+		background-color: var(--headBackgroundColor);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 50px 50px;
+		position: absolute;
+		border-radius: 10px;
+		border: 2px var(--headBorderColor) solid;
+		color: var(--headlinkColor);
+		margin-inline: auto;
+
+		small {
+			margin-top: 5px;
+			a {
+				color: var(--headlinkColor);
+			}
+		}
+		ul {
+			list-style: none;
+		}
+		li {
+			margin-top: 20px;
+			display: flex;
+			justify-content: space-around;
+		}
+		input {
+			padding: 5px 20px;
+			border-radius: 5px;
+			color: var(--headlinkColor);
+			background-color: var(--headBackgroundColor);
+			border: 2px var(--headBorderColor) solid;
+		}
+		button {
+			background-color: var(--headBackgroundColor);
+			padding: 3px 16px;
+			font-size: large;
+			font-weight: 600 !important;
+			border-radius: 10px;
+			border: 2px var(--headlinkColor) solid;
+			color: var(--headlinkColor);
+			cursor: pointer;
+		}
+		.empty {
+			margin-top: 5px !important;
+		}
+	}
+	p a {
+		color: white;
+	}
+}
+body {
+	height: 300vh;
+	color: var(--headlinkColor);
+	background-color: var(--mainBackgroundColor);
+	.sh1 {
+		display: flex;
+		justify-content: center;
+		margin-bottom: -30px;
+		margin-top: 100px;
+	}
+	h1 {
+		margin: 40px 30px;
+	}
+	.postH4 {
+		margin-bottom: 40px;
+		margin-left: 30px;
+		margin-top: -40px;
+	}
+
+	.h2 {
+		text-align: center;
+		margin-top: 40px;
+		margin-bottom: -30px;
+	}
+	.search,
+	#categories form {
+		button,
+		input,
+		select,
+		a {
+			background-color: var(--headBackgroundColor);
+			padding: 5px 10px;
+			font-size: larger;
+			font-weight: 600;
+			border-radius: 10px;
+			border: 2px var(--headlinkColor) solid;
+			color: var(--headlinkColor);
+			text-decoration: none;
+		}
+		select:hover {
+			border-color: var(--headlinkColor) transparent var(--headlinkColor)
+				var(--headlinkColor);
+		}
+
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+		margin-top: 60px;
+		flex-wrap: wrap;
+
+		button {
+			cursor: pointer;
+		}
+		button:hover,
+		a:hover {
+			box-shadow: 0px 0px 10px var(--headBorderColor);
+		}
+		button:focus,
+		a:focus {
+			box-shadow: 0px 0px 20px var(--headBorderColor);
+		}
+		input:focus {
+			box-shadow: 0px 0px 15px var(--headBorderColor);
+		}
+		.b {
+			border-color: #0bbb22;
+			color: #0bbb22;
+		}
+
+		.b:hover {
+			box-shadow: 0px 0px 10px #0bbb22 !important;
+			border: 2px #0bbb22 solid !important;
+			color: #0bbb22 !important;
+		}
+	}
+	#categories {
+		flex-wrap: wrap;
+		margin-left: 20vw;
+		margin-right: 20vw;
+	}
+	.categorieSelected {
+		border: 2px #bb170b solid !important;
+		color: #bb170b !important;
+	}
+	.categorieSelected:hover {
+		box-shadow: 0px 0px 10px #bb170b !important;
+		border: 2px #bb170b solid !important;
+		color: #bb170b !important;
+	}
+	.categorieSelected:focus {
+		box-shadow: 0px 0px 20px #df180a !important;
+	}
+}
+.searchRe {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 50px;
+	margin-top: 50px;
+
+	.searchA {
+		display: flex;
+		gap: 20px;
+		color: var(--headlinkColor);
+		text-decoration: none;
+		width: 600px;
+		height: 150px;
+		div {
+			padding: 15px 15px 15px 25px;
+		}
+		background-color: var(--SecBackgroundColor);
+		h2 {
+		}
+		img {
+			margin-right: -25px;
+			width: 150px;
+			height: 150px;
+			object-fit: cover;
+		}
+	}
+	#ERROR {
+		color: #bb170b !important;
+		font-weight: 900;
+	}
+}
+.Post {
+	h1 a {
+		font-size: medium;
+		color: #bb170b;
+		text-decoration: none;
+	}
+	h1 a:hover {
+		color: #e01b0d;
+	}
+	h1 a:focus {
+		color: #ff1100;
+	}
+	display: flex;
+	flex-direction: column;
+
+	img {
+		width: 100vw;
+		height: 500px;
+		object-fit: cover;
+	}
+	div {
+		margin-left: 10%;
+		margin-right: 10%;
+		background-color: var(--SecBackgroundColor);
+		padding: 30px;
+		border: 2px var(--SecBackgroundColor) solid;
+		border-radius: 10px;
+	}
+}
+.ql-stroke,
+.ql-snow .ql-picker {
+	color: white !important;
+	stroke: rgb(255, 246, 246) !important;
+}
+.ql-picker-options {
+	background-color: black !important;
+}
+#createForm {
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	width: 70vw;
+	justify-content: center;
+
+	li {
+		width: 60vw;
+	}
+	.errorli {
+		margin-top: -15px;
+		margin-bottom: 20px;
+	}
+	.errorP {
+		color: #df180a;
+	}
+	.inputs {
+		input {
+			margin-left: 28px;
+		}
+	}
+	ul {
+		list-style: none;
+	}
+
+	input,
+	select {
+		background-color: var(--headBackgroundColor);
+		padding: 2px 2px;
+		margin-bottom: 20px;
+		font-size: larger;
+		font-weight: 600;
+		border-radius: 2px;
+		border: 2px var(--headlinkColor) solid;
+		color: var(--headlinkColor);
+		text-decoration: none;
+		margin-left: 20px;
+	}
+	.buttons123 {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 30px;
+		button {
+			background-color: var(--headBackgroundColor);
+
+			margin-bottom: 20px;
+			font-size: larger;
+			font-weight: 600;
+			border-radius: 2px;
+			border: 2px var(--headlinkColor) solid;
+			color: var(--headlinkColor);
+			padding: 10px 10vw;
+		}
+		button:hover {
+			box-shadow: 0px 0px 10px var(--headBorderColor);
+		}
+		button:focus {
+			box-shadow: 0px 0px 20px var(--headBorderColor);
+		}
+	}
+}
+#home {
+	display: flex;
+	justify-content: center;
+	gap: 100px;
+	flex-wrap: wrap;
+	.indexPost {
+		.block {
+			margin-left: 30%;
+			margin-right: 30%;
+		}
+		background-color: var(--SecBackgroundColor);
+		border: 2px var(--SecBackgroundColor) solid;
+		border-radius: 10px;
+		padding-top: 50px;
+		padding-bottom: 50px;
+		width: 50vw;
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 50px;
+
+		.searchA {
+			display: flex;
+			gap: 20px;
+			color: var(--headlinkColor);
+			text-decoration: none;
+			width: 400px;
+			height: 150px;
+			div {
+				padding: 15px 15px 15px 25px;
+			}
+			background-color: var(--mainBackgroundColor);
+			border-radius: 10px;
+			h2 {
+			}
+			img {
+				margin-right: -25px;
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+			}
+		}
+	}
+	#categorie2 {
+		width: 20vw;
+		background-color: var(--SecBackgroundColor);
+		border: 2px var(--SecBackgroundColor) solid;
+		border-radius: 10px;
+		height: 100%;
+		padding: 30px;
+		position: sticky;
+		top: 195px;
+		.block {
+			text-align: center;
+			margin-bottom: 30px;
+		}
+		form {
+			display: flex;
+			flex-wrap: wrap;
+
+			justify-content: center;
+			gap: 10px;
+		}
+		button {
+			background-color: var(--headBackgroundColor);
+			padding: 5px 10px;
+			font-size: larger;
+			font-weight: 600;
+
+			border-radius: 10px;
+			border: 2px var(--headlinkColor) solid;
+			color: var(--headlinkColor);
+			text-decoration: none;
+		}
+		button:hover {
+			box-shadow: 0px 0px 10px var(--headBorderColor);
+		}
+		button:focus {
+			box-shadow: 0px 0px 20px var(--headBorderColor);
+		}
+	}
+}
+.post {
+	margin-top: 40px;
+	form,
+	div {
+		margin-left: 10%;
+		margin-right: 10%;
+		background-color: var(--SecBackgroundColor);
+		padding: 30px;
+		border: 2px var(--SecBackgroundColor) solid;
+		border-radius: 10px;
+		display: flex;
+		justify-content: center;
+		flex-direction: column;
+	}
+	.noCom {
+		display: block;
+		margin: auto;
+		margin-bottom: 100px;
+	}
+	label {
+		font-size: larger;
+	}
+	textarea {
+		background-color: var(--headBackgroundColor);
+		padding: 5px 10px;
+		font-size: larger;
+		font-weight: 600;
+		border-radius: 10px;
+		border: 2px var(--headlinkColor) solid;
+		color: var(--headlinkColor);
+		text-decoration: none;
+		height: 100px;
+		padding: 20px;
+	}
+	button {
+		margin-top: 20px;
+		width: 200px;
+		margin-left: auto;
+
+		background-color: var(--headBackgroundColor);
+		padding: 5px 10px;
+		font-size: larger;
+		font-weight: 600 !important;
+		border-radius: 10px;
+		border: 2px var(--headlinkColor) solid;
+		color: var(--headlinkColor);
+	}
+	.comment {
+		padding: 10px;
+		background-color: var(--mainBackgroundColor);
+		p {
+			margin-left: 10px;
+		}
+		a {
+			font-size: x-small;
+			color: #bb170b;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #e01b0d;
+		}
+		a:focus {
+			color: #ff1100;
+		}
+
+		h3 {
+			font-size: x-small;
+		}
+	}
+	.centerH2 {
+		text-align: center;
+		margin: 20px;
+		margin-bottom: 40px;
+	}
+}
+* {
+	.admin {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 40px;
+		justify-content: center;
+		padding: 40px;
+		background-color: var(--mainBackgroundColor);
+		color: var(--headlinkColor);
+	}
+
+	.admin > div {
+		background-color: var(--SecBackgroundColor);
+		border: 2px solid var(--headBorderColor);
+		border-radius: 10px;
+		padding: 20px;
+		max-width: 500px;
+		width: 90%;
+		box-sizing: border-box;
+	}
+
+	.admin h2 {
+		margin-bottom: 20px;
+		text-align: center;
+		font-size: 1.8em;
+	}
+
+	.admin form {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+
+	.admin label {
+		font-size: 1em;
+		margin-right: 5px;
+	}
+
+	.admin input[type="text"],
+	.admin button {
+		background-color: var(--headBackgroundColor);
+		color: var(--headlinkColor);
+		border: 2px solid var(--headBorderColor);
+		border-radius: 8px;
+		padding: 8px 12px;
+		font-size: 1em;
+		transition: box-shadow 0.3s;
+	}
+
+	.admin input[type="text"]:focus,
+	.admin button:focus {
+		box-shadow: 0 0 10px var(--headBorderColor);
+		outline: none;
+	}
+
+	.admin button {
+		cursor: pointer;
+	}
+
+	.admin button:hover {
+		box-shadow: 0 0 8px var(--headBorderColor);
+	}
+
+	.admin .users,
+	.admin .comment {
+		background-color: var(--mainBackgroundColor);
+		border-radius: 8px;
+		padding: 15px;
+		margin-bottom: 15px;
+	}
+
+	.admin .users h2,
+	.admin .comment h2 {
+		font-size: 1.2em;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.admin .users h3,
+	.admin .users h4,
+	.admin .comment h3 {
+		font-size: 0.9em;
+		margin-top: 5px;
+		margin-left: 5px;
+	}
+
+	.admin .comment p {
+		margin-top: 10px;
+		font-size: 1em;
+		line-height: 1.4;
+	}
+
+	.admin a {
+		color: #bb170b;
+		text-decoration: none;
+		font-size: 0.9em;
+	}
+
+	.admin a:hover {
+		text-decoration: underline;
+		color: #e01b0d;
+	}
+
+	@media (max-width: 600px) {
+		.admin {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.admin > div {
+			max-width: 90%;
+		}
+	}
+}

@@ -518,3 +518,120 @@ body {
 		margin-bottom: 40px;
 	}
 }
+* {
+	.admin {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 40px;
+		justify-content: center;
+		padding: 40px;
+		background-color: var(--mainBackgroundColor);
+		color: var(--headlinkColor);
+	}
+
+	.admin > div {
+		background-color: var(--SecBackgroundColor);
+		border: 2px solid var(--headBorderColor);
+		border-radius: 10px;
+		padding: 20px;
+		max-width: 500px;
+		width: 90%;
+		box-sizing: border-box;
+	}
+
+	.admin h2 {
+		margin-bottom: 20px;
+		text-align: center;
+		font-size: 1.8em;
+	}
+
+	.admin form {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		justify-content: center;
+		margin-bottom: 20px;
+	}
+
+	.admin label {
+		font-size: 1em;
+		margin-right: 5px;
+	}
+
+	.admin input[type="text"],
+	.admin button {
+		background-color: var(--headBackgroundColor);
+		color: var(--headlinkColor);
+		border: 2px solid var(--headBorderColor);
+		border-radius: 8px;
+		padding: 8px 12px;
+		font-size: 1em;
+		transition: box-shadow 0.3s;
+	}
+
+	.admin input[type="text"]:focus,
+	.admin button:focus {
+		box-shadow: 0 0 10px var(--headBorderColor);
+		outline: none;
+	}
+
+	.admin button {
+		cursor: pointer;
+	}
+
+	.admin button:hover {
+		box-shadow: 0 0 8px var(--headBorderColor);
+	}
+
+	.admin .users,
+	.admin .comment {
+		background-color: var(--mainBackgroundColor);
+		border-radius: 8px;
+		padding: 15px;
+		margin-bottom: 15px;
+	}
+
+	.admin .users h2,
+	.admin .comment h2 {
+		font-size: 1.2em;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.admin .users h3,
+	.admin .users h4,
+	.admin .comment h3 {
+		font-size: 0.9em;
+		margin-top: 5px;
+		margin-left: 5px;
+	}
+
+	.admin .comment p {
+		margin-top: 10px;
+		font-size: 1em;
+		line-height: 1.4;
+	}
+
+	.admin a {
+		color: #bb170b;
+		text-decoration: none;
+		font-size: 0.9em;
+	}
+
+	.admin a:hover {
+		text-decoration: underline;
+		color: #e01b0d;
+	}
+
+	@media (max-width: 600px) {
+		.admin {
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.admin > div {
+			max-width: 90%;
+		}
+	}
+}

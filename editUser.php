@@ -18,6 +18,13 @@ $error = false;
 $usernameTaken = false;
 $emailUsed = false;
 
+if ($_GET && isset($_GET['userName'])) {
+    $query = 'SELECT * FROM users where userName = :userName limit 1';
+    $statement = $db->prepare($query);
+    $statement->bindValue(':userName', $_GET['userName']);
+    $statement->execute();
+    $user = $statement->fetch();
+}
 if ($_POST) {
     $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
     $password = $_POST['password'];
@@ -76,7 +83,7 @@ WHERE
 
     $statement->bindvalue(':email', $email);
     $statement->execute();
-    if ($statement->rowCount() > 0) {
+    if ($statement->rowCount() > 0 && $email != $user['email']) {
         $error = true;
         $emailUsed = true;
     }
@@ -91,17 +98,18 @@ WHERE
     $statement->bindvalue(':userName', $username);
 
     $statement->execute();
-    if ($statement->rowCount() > 0) {
+    if ($statement->rowCount() > 0 && $username != $_GET['userName']) {
         $error = true;
         $usernameTaken = true;
     }
 
     if ($error == false) {
-        $query = 'INSERT INTO users(userName,password,email) values (:userName, :password, :email)';
+        $query = 'UPDATE users SET password = :password, email = :email, userName = :usernames WHERE userName = :userName';
         $statement = $db->prepare($query);
-        $statement->bindvalue(':userName', $username);
-        $statement->bindvalue(':password', $password);
-        $statement->bindvalue(':email', $email);
+        $statement->bindValue(':userName', $_GET['userName']);
+        $statement->bindValue(':usernames', $username);
+        $statement->bindValue(':password', $password);
+        $statement->bindValue(':email', $email);
 
         $statement->execute();
     }
@@ -130,7 +138,7 @@ WHERE
         <form action="" method="post">
             <ul>
                 <li>
-                    <input type="text" name="username" placeholder="Username">
+                    <input type="text" name="username" placeholder="Username" value="<?= $user['userName'] ?>">
                 </li>
                 <?php if ($usernameEmpty): ?>
                     <li class="empty">
@@ -143,7 +151,7 @@ WHERE
                     </li>
                 <?php endif ?>
                 <li>
-                    <input type="email" name="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email" value="<?= $user['email'] ?>">
                 </li>
                 <?php if ($emailError): ?>
                     <li class="empty">
@@ -161,7 +169,7 @@ WHERE
                     </li>
                 <?php endif ?>
                 <li>
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="text" name="password" placeholder="Password" value="<?= $user['password'] ?>">
                 </li>
                 <?php if ($passwordempty): ?>
                     <li class="empty">
@@ -174,7 +182,7 @@ WHERE
                     </li>
                 <?php endif ?>
                 <li>
-                    <input type="password" name="repassword" placeholder="ReType Password">
+                    <input type="text" name="repassword" placeholder="ReType Password" value="<?= $user['password'] ?>">
                 </li>
                 <?php if ($rePasswordempty): ?>
                     <li class="empty">
@@ -189,14 +197,14 @@ WHERE
                 <?php endif ?>
                  <?php if ($_POST && $error == false): ?>
                     <li class="empty">
-                        <p>Account created!</p>
+                        <p>Account updated!</p>
                         <br>
-                        <p><a href="?command=signIn">SignIn</a></p>
+                        <p><a href="admin.php">Go Back?</a></p>
                     </li>
                 <?php endif ?>
                 <li>
-                    <button type="submit">Reset</button>
-                    <button type="submit" name="signUp" value="signUp">Sign Up</button>
+                    <button type="reset">Reset</button>
+                    <button type="submit" name="signUp" value="signUp">Update</button>
 
                 </li>
             </ul>
