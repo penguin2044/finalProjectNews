@@ -133,6 +133,7 @@ if ($_POST) {
         $statement->execute();  // executing the statmate
     }
     if (isset($_POST['remove']) && $_POST['remove'] == 'on') {
+        $currentImage = $post['postImage'];
         $query = "UPDATE posts SET postImage = :image WHERE postID = $id";
         $statement = $db->prepare($query);
         //  Bind values to the parameters
@@ -140,6 +141,21 @@ if ($_POST) {
         $statement->bindValue(':image', null);
 
         $statement->execute();  // executing the statmate
+        if (!empty($currentImage)) {
+            $checkQuery = 'SELECT COUNT(*) as imageCount FROM posts WHERE postImage = :imageName AND postImage IS NOT NULL';
+            $checkStatement = $db->prepare($checkQuery);
+            $checkStatement->bindValue(':imageName', $currentImage);
+            $checkStatement->execute();
+            $result = $checkStatement->fetch();
+
+            // If no other posts are using this image, delete it from the filesystem
+            if ($result['imageCount'] == 0) {
+                $imagePath = file_upload_path($currentImage);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);  // Delete the file
+                }
+            }
+        }
         $removeWork = true;
         $error = true;
     }

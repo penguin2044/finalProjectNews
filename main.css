@@ -491,6 +491,7 @@ body {
 	}
 	.comment {
 		padding: 10px;
+		background-color: var(--mainBackgroundColor);
 		p {
 			margin-left: 10px;
 		}
