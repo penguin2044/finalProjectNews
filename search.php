@@ -97,10 +97,14 @@ if ($_POST && $_GET && isset($_GET['categorie'])) {
   <?php if (!$nosearch): ?>
   <?php foreach ($posts as $row): ?>
     <a href="post.php?postID=<?= $row['postID'] ?>" class="searchA" >
+         <?php if ($row['postImage'] != null): ?>
         <img src="Postimages/<?= $row['postImage'] ?>" alt="Could Not find image">
+        <?php endif ?>
         <div>
             <h2><?= $row['postName'] ?></h2>
-            <small><?= $row['userName'] ?></small>
+          <h3><?= $row['userName'] ?></h3>
+              <h4><small>Posted on <?= $row['dateMade'] ?></small> </h4> 
+              <h4><small>Last edited on <?= $row['dateEdit'] ?></small></h4> 
             
         </div>
   </a>

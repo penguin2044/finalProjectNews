@@ -149,6 +149,12 @@ body {
 	h1 {
 		margin: 40px 30px;
 	}
+	.postH4 {
+		margin-bottom: 40px;
+		margin-left: 30px;
+		margin-top: -40px;
+	}
+
 	.h2 {
 		text-align: center;
 		margin-top: 40px;
@@ -238,12 +244,13 @@ body {
 		width: 600px;
 		height: 150px;
 		div {
-			padding: 15px 15px 15px 0px;
+			padding: 15px 15px 15px 25px;
 		}
 		background-color: var(--SecBackgroundColor);
 		h2 {
 		}
 		img {
+			margin-right: -25px;
 			width: 150px;
 			height: 150px;
 			object-fit: cover;
@@ -316,6 +323,7 @@ body {
 	ul {
 		list-style: none;
 	}
+
 	input,
 	select {
 		background-color: var(--headBackgroundColor);
@@ -381,13 +389,14 @@ body {
 			width: 400px;
 			height: 150px;
 			div {
-				padding: 15px 15px 15px 0px;
+				padding: 15px 15px 15px 25px;
 			}
 			background-color: var(--mainBackgroundColor);
 			border-radius: 10px;
 			h2 {
 			}
 			img {
+				margin-right: -25px;
 				width: 150px;
 				height: 150px;
 				object-fit: cover;

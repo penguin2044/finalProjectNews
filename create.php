@@ -104,7 +104,7 @@
             if ($image_upload_detected) {
                 $statement->bindValue(':image', $image_filename);
             } else {
-                $statement->bindValue(':image', 'default.png');
+                $statement->bindValue(':image', null);
             }
             $statement->bindValue(':user', $_SESSION['username']);
             $statement->bindValue(':category', $categorie);

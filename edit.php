@@ -41,6 +41,7 @@ $messageError = false;
 $postNameError = false;
 $postImageError = false;
 $catErrror = false;
+$removeWork = false;
 
 if ($_POST) {
     $postName = $_POST['postName'];
@@ -68,6 +69,7 @@ if ($_POST) {
             $error = true;
         }
     }
+
     // file_upload_path() - Safely build a path String that uses slashes appropriate for our OS.
 
     // Default upload path is an 'uploads' sub-folder in the current folder.
@@ -113,7 +115,8 @@ if ($_POST) {
 
     if (!$error) {
         $id = $post['postID'];
-        $query = "UPDATE posts SET postName = :title, postMessage = :message, postImage = :image, categoryID = :category WHERE postID = $id";
+        $date = date('Y-m-d H:i:s');
+        $query = "UPDATE posts SET postName = :title, postMessage = :message, postImage = :image, categoryID = :category, dateEdit = :dateEdit WHERE postID = $id";
         $statement = $db->prepare($query);
         //  Bind values to the parameters
 
@@ -124,11 +127,23 @@ if ($_POST) {
         } else {
             $statement->bindValue(':image', $post['postImage']);
         }
-
+        $statement->bindValue(':dateEdit', $date);
         $statement->bindValue(':category', $categorie);
 
         $statement->execute();  // executing the statmate
+    }
+    if (isset($_POST['remove']) && $_POST['remove'] == 'on') {
+        $query = "UPDATE posts SET postImage = :image WHERE postID = $id";
+        $statement = $db->prepare($query);
+        //  Bind values to the parameters
 
+        $statement->bindValue(':image', null);
+
+        $statement->execute();  // executing the statmate
+        $removeWork = true;
+        $error = true;
+    }
+    if (!$error) {
         header(header: "Location: post.php?postID={$id}");  // once the above code is done it reloads the page with the get id of id
     }
 }
@@ -149,7 +164,11 @@ if ($_POST) {
             
             <li> 
     <?php if ($postImageError): ?>
-    <li class="errorli"><p class="errorP">ERROR: no Image found or invalid format we only take png jpeg jpg and gif images.</p></li>
+    <li class="errorli"><p class="errorP">ERROR:invalid format we only take png jpeg jpg and gif images.</p></li>
+    <?php endif ?>
+        <li> <label>Remove image</label> <input type="checkbox" name="remove" id="remove"></li>
+         <?php if ($removeWork): ?>
+    <li class="errorli"><p class="errorP">the image Has been removed</p></li>
     <?php endif ?>
                 <li> <label for='image'>Post category:</label><select name="categorie" id="categorie">
                 <option value="<?= $categori['categoryID'] ?>"><?= $categori['categoryName'] ?></option>

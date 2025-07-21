@@ -62,9 +62,15 @@ if ($_POST) {
 
 <div class="Post">
   
- 
+ <?php if ($row['postImage'] != null): ?>
  <img src="PostImages/<?= $row['postImage'] ?>" alt="could not find image">
- <h1 ><?= $row['postName'] ?> <small> by <?= $row['userName'] ?></small> <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == 1): ?><a href="edit.php?postID=<?= $row['postID'] ?>">Edit</a> <?php endif ?></h1>
+ <?php endif ?>
+ <h1 ><?= $row['postName'] ?> <small> by <?= $row['userName'] ?></small> 
+ <?php if (isset($_SESSION['logged']) && $_SESSION['logged'] == 1): ?><a href="edit.php?postID=<?= $row['postID'] ?>">Edit</a> <?php endif ?></h1>
+                
+              <h4 class="postH4"><small>Posted on <?= $row['dateMade'] ?></small> </h4> 
+              <h4 class="postH4"><small>Last edited on <?= $row['dateEdit'] ?></small></h4> 
+            
  <div class="ql-editor"> <?= $row['postMessage'] ?></div>
  
  </div>
