@@ -43,7 +43,40 @@ $postImageError = false;
 $catErrror = false;
 $removeWork = false;
 
-if ($_POST) {
+// Handle delete action
+if (isset($_POST['delete_post']) && $_POST['delete_post'] == 'yes') {
+    $postID = $post['postID'];
+    $currentImage = $post['postImage'];
+
+    // Delete the post from database
+    $deleteQuery = 'DELETE FROM posts WHERE postID = :postID';
+    $deleteStatement = $db->prepare($deleteQuery);
+    $deleteStatement->bindValue(':postID', $postID);
+    $deleteStatement->execute();
+
+    // Handle image deletion if it exists and is not used elsewhere
+    if (!empty($currentImage)) {
+        $checkQuery = 'SELECT COUNT(*) as imageCount FROM posts WHERE postImage = :imageName AND postImage IS NOT NULL';
+        $checkStatement = $db->prepare($checkQuery);
+        $checkStatement->bindValue(':imageName', $currentImage);
+        $checkStatement->execute();
+        $result = $checkStatement->fetch();
+
+        // If no other posts are using this image, delete it from the filesystem
+        if ($result['imageCount'] == 0) {
+            $imagePath = file_upload_path($currentImage);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);  // Delete the file
+            }
+        }
+    }
+
+    // Redirect to a posts list page or main page after deletion
+    header('Location: index.php');  // Change this to your desired redirect location
+    exit();
+}
+
+if ($_POST && !isset($_POST['delete_post'])) {
     $postName = filter_input(INPUT_POST, 'postName', FILTER_SANITIZE_SPECIAL_CHARS);
     $allowedTags = '<p><br><strong><em><u><ol><ul><li><h2><h3><h4><h5><h6><blockquote>';
 
@@ -165,6 +198,14 @@ if ($_POST) {
     }
 }
 
+// Move the file_upload_path function outside the POST check so it's always available
+function file_upload_path($original_filename, $upload_subfolder_name = 'PostImages')
+{
+    $current_folder = dirname(__FILE__);
+    $path_segments = [$current_folder, $upload_subfolder_name, basename($original_filename)];
+    return join(DIRECTORY_SEPARATOR, $path_segments);
+}
+
 ?>
     <body>
     <h1>Edit Post</h1>
@@ -230,13 +271,35 @@ if ($_POST) {
         myForm.submit();
         
         });
+
+    // Handle delete button with confirmation
+    function deletePost() {
+        if (confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+            // Create a hidden form for deletion
+            const deleteForm = document.createElement('form');
+            deleteForm.method = 'POST';
+            deleteForm.action = '';
+            
+            const deleteInput = document.createElement('input');
+            deleteInput.type = 'hidden';
+            deleteInput.name = 'delete_post';
+            deleteInput.value = 'yes';
+            
+            deleteForm.appendChild(deleteInput);
+            document.body.appendChild(deleteForm);
+            deleteForm.submit();
+        }
+    }
     </script>
     </li>
     <?php if ($messageError): ?>
     <li><p class="errorP">ERROR:  no content</p></li>
     <?php endif ?>
     <input  name="postMessage" type="hidden" id="postMessage" value="" >
-            <li class="buttons123"><button type="reset">Reset</button> <button type="submit" >Submit</button></li>
+            <li class="buttons123">
+                <button type="button" onclick="deletePost()" style="background-color: #dc3545; color: white;">Delete Post</button> 
+                <button type="submit" >Update Post</button>
+            </li>
         </ul>
     </form>
     
