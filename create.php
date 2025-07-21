@@ -26,10 +26,11 @@
     $catErrror = false;
 
     if ($_POST) {
-        $postName = $_POST['postName'];
+        $postName = filter_input(INPUT_POST, 'postName', FILTER_SANITIZE_SPECIAL_CHARS);
+        $allowedTags = '<p><br><strong><em><u><ol><ul><li><h2><h3><h4><h5><h6><blockquote>';
 
         $categorie = $_POST['categorie'];
-        $postMessage = $_POST['postMessage'];
+        $postMessage = strip_tags($_POST['postMessage'], $allowedTags);
 
         $error = false;
         if (empty($postName)) {

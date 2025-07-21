@@ -27,7 +27,9 @@ if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1) {
 
                 <li>
                     <form action="search.php" method="post">
-                       
+                        <input type="text" name="search">
+                        <input hidden type="text" name="drop" placeholder="title">
+                          
                         <button type="submit">Search</button>
                     </form>
                 </li>

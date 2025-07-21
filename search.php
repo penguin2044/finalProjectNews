@@ -55,14 +55,19 @@ if ($_POST && $_GET && isset($_GET['categorie'])) {
   $statement2->execute();
   $posts = $statement2->fetchAll();
 } else if ($_POST && !isset($_GET['categorie']) && empty($_POST['search'])) {
-  $nosearch = true;
+  $query2 = 'SELECT * FROM posts limit 100';
+  $statement2 = $db->prepare($query2);
+  $statement2->execute();
+  $posts = $statement2->fetchAll();
 } else if (!$_POST) {
   $query2 = 'SELECT * FROM posts limit 100';
   $statement2 = $db->prepare($query2);
   $statement2->execute();
   $posts = $statement2->fetchAll();
 }
-
+if (empty($posts)) {
+  $nosearch = true;
+}
 ?>
 <body>
 <h1 class="sh1">Search</h1>
@@ -111,7 +116,7 @@ if ($_POST && $_GET && isset($_GET['categorie'])) {
     <?php endforeach ?>
     <?php endif ?>
     <?php if ($nosearch): ?>
-      <p id="ERROR">You have to pick a Categorie or put something in the input bar</p>
+      <p id="ERROR">No posts could be found</p>
       <?php endif ?>
 </div>
 </body>
