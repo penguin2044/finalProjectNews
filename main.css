@@ -1,9 +1,9 @@
 /* CSS Variables - Light Mode */
 :root {
 	/* Primary Colors */
-	--primary-blue: #667eea;
+	--primary-blue: #2d4fe2;
 	--primary-purple: #764ba2;
-	--primary-hover: #5a6fd8;
+	--primary-hover: #304aca;
 
 	/* Background Colors */
 	--bg-light: #f8f9fa;
@@ -41,9 +41,9 @@
 /* Dark Mode Variables */
 [data-theme="dark"] {
 	/* Primary Colors - Lighter in dark mode */
-	--primary-blue: #7c8aed;
-	--primary-purple: #8a5faa;
-	--primary-hover: #8b97f0;
+	--primary-blue: #2d4fe2;
+	--primary-purple: #764ba2;
+	--primary-hover: #304aca;
 
 	/* Background Colors */
 	--bg-light: #1a1a1a;
