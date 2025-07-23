@@ -1,84 +1,76 @@
-<?php 
+<?php
 
-
-
-
-
- $passwordempty = false;
-  $usernameEmpty = false;
+$passwordempty = false;
+$usernameEmpty = false;
 $usernameNotFound = false;
 $passwordWrong = false;
-  $loggedIn = false;
+$loggedIn = false;
 if ($_POST) {
-$username = filter_input(INPUT_POST, "username", FILTER_SANITIZE_SPECIAL_CHARS);
-$password = $_POST["password"];
-$error = false;
+    $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS);
+    $password = $_POST['password'];
+    $error = false;
 
- if (empty($username)) {
+    if (empty($username)) {
         $usernameEmpty = true;
-       if ($error != true) {
-        $error = true;
-       }
+        if ($error != true) {
+            $error = true;
+        }
     }
-    if (empty($password )) {
+    if (empty($password)) {
         $passwordempty = true;
         if ($error != true) {
-        $error = true;
-       }
+            $error = true;
+        }
     }
- if ( strlen($password) <= 8 && strlen($password) >= 50) {
-       
-         if($error != true) {
-        $error = true;
-       }
+    if (strlen($password) <= 8 && strlen($password) >= 50) {
+        if ($error != true) {
+            $error = true;
+        }
     }
 
     if ($error == false) {
-         $query = "SELECT * FROM users WHERE userName = :userName";
-   $statement = $db->prepare($query);
-   $statement-> bindvalue(':userName', $username);
-   
-   $statement->execute();
+        $query = 'SELECT * FROM users WHERE userName = :userName';
+        $statement = $db->prepare($query);
+        $statement->bindvalue(':userName', $username);
+
+        $statement->execute();
     }
- if ($error == false && $statement->rowCount() == 0 ) {
-       if ($error != true) {
-        $error = true;
-       }
-       $usernameNotFound = true;
-    
-   }
-     if ($error == false) {
-         $query = "SELECT * FROM users WHERE userName = :userName  and password = :password";
-   $statement = $db->prepare($query);
-   $statement-> bindvalue(':password', $password);
-   $statement-> bindvalue(':userName', $username);
-   
-   $statement->execute();
-    }
- if ($error == false && $statement->rowCount() == 0 ) {
+    if ($error == false && $statement->rowCount() == 0) {
         if ($error != true) {
-        $error = true;
-       }
-       $passwordWrong = true;
-    
-   }
+            $error = true;
+        }
+        $usernameNotFound = true;
+    }
+    if ($error == false) {
+        $query = 'SELECT * FROM users WHERE userName = :userName  and password = :password';
+        $statement = $db->prepare($query);
+        $statement->bindvalue(':password', $password);
+        $statement->bindvalue(':userName', $username);
+
+        $statement->execute();
+    }
+    if ($error == false && $statement->rowCount() == 0) {
+        if ($error != true) {
+            $error = true;
+        }
+        $passwordWrong = true;
+    }
     if ($error != true) {
         $loggedIn = true;
-        
 
-        $_SESSION["logged"] = true;
+        $_SESSION['logged'] = true;
 
-       $user = $statement -> fetch();
-        $admin = $user["isAdmin"];
-        
+        $user = $statement->fetch();
+        $admin = $user['isAdmin'];
+
         if ($admin == 1) {
-            $_SESSION["isAdmin"] = true;
+            $_SESSION['isAdmin'] = true;
+        } else {
+            $_SESSION['isAdmin'] = false;
         }
-        else{$_SESSION["isAdmin"] = false;}
-        $_SESSION["logged"] = true;
-        $_SESSION["username"] = $username;
-       }
-  
+        $_SESSION['logged'] = true;
+        $_SESSION['username'] = $username;
+    }
 }
 
 ?>
@@ -92,7 +84,7 @@ $error = false;
         <form action="" method="post">
             <ul>
                 <li>
-                    <input type="text" name="username" placeholder="Username">
+                    <input type="text" name="username" placeholder="Username" value="<?php if ($_POST && isset($_POST['username']) && !empty($_POST['username'])): ?> <?= $_POST['username'] ?> <?php endif ?>">
                 </li>
                  <?php if ($usernameEmpty): ?>
                     <li class="empty">
@@ -105,7 +97,7 @@ $error = false;
                     </li>
                 <?php endif ?>
                 <li>
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password" value="<?php if ($_POST && isset($_POST['password']) && !empty($_POST['password'])): ?> <?= $_POST['password'] ?> <?php endif ?>">
                 </li>
                 <?php if ($passwordempty): ?>
                     <li class="empty">
@@ -126,7 +118,7 @@ $error = false;
                     </li>
                 <?php endif ?>
                 <li>
-                    <button type="submit">Reset</button>
+                    <button type="reset">Reset</button>
                     <button type="submit" name="signIn" value="signIn">Login</button>
 
                 </li>

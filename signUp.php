@@ -27,7 +27,7 @@ if ($_POST) {
             $error = true;
         }
     }
-    if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $email)) {
+    if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', strtolower($email))) {
         $emailregex = true;
         if ($error != true) {
             $error = true;
@@ -111,7 +111,7 @@ WHERE
         <form action="" method="post">
             <ul>
                 <li>
-                    <input type="text" name="username" placeholder="Username">
+                    <input type="text" name="username" placeholder="Username" <?php if ($_POST && isset($_POST['username'])): ?> value="<?= $username ?>" <?php endif ?>>
                 </li>
                 <?php if ($usernameEmpty): ?>
                     <li class="empty">
@@ -124,7 +124,7 @@ WHERE
                     </li>
                 <?php endif ?>
                 <li>
-                    <input type="email" name="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email" <?php if ($_POST && isset($_POST['email'])): ?>value="<?= $email ?>"<?php endif ?>>
                 </li>
                 <?php if ($emailError): ?>
                     <li class="empty">
@@ -142,7 +142,7 @@ WHERE
                     </li>
                 <?php endif ?>
                 <li>
-                    <input type="password" name="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password" <?php if ($_POST && isset($_POST['password']) && !empty($_POST['password'])): ?> value="<?= $password ?>" <?php endif ?>>
                 </li>
                 <?php if ($passwordempty): ?>
                     <li class="empty">
@@ -155,7 +155,7 @@ WHERE
                     </li>
                 <?php endif ?>
                 <li>
-                    <input type="password" name="repassword" placeholder="ReType Password">
+                    <input type="password" name="repassword" placeholder="ReType Password" <?php if ($_POST && isset($_POST['repassword']) && !empty($_POST['repassword'])): ?>value="<?= $_POST['repassword'] ?>" <?php endif ?>>
                 </li>
                 <?php if ($rePasswordempty): ?>
                     <li class="empty">
@@ -176,7 +176,7 @@ WHERE
                     </li>
                 <?php endif ?>
                 <li>
-                    <button type="submit">Reset</button>
+                    <button type="reset ">Reset</button>
                     <button type="submit" name="signUp" value="signUp">Sign Up</button>
 
                 </li>
