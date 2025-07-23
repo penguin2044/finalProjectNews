@@ -470,7 +470,7 @@ h1 {
 
 .searchA img {
 	width: 120px;
-	height: 80px;
+
 	object-fit: cover;
 	border-radius: 8px;
 	flex-shrink: 0;
